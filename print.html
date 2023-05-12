@@ -180,7 +180,7 @@ terminal UI.</p>
     <a href="https://github.com/neovide/neovide/releases/latest/download/Neovide.dmg.zip">
         <button class="button-hover color">Download for macOS</button>
     </a>
-    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide-windows.zip">
+    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.msi.zip">
         <button class="button-hover color">Download for Windows</button>
     </a>
     <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.tar.gz">
@@ -228,23 +228,60 @@ and background from built in window transparency.</p>
 Communication is passed via standard io into the wsl copy of neovim providing identical experience
 similar to Visual Studio Code's
 <a href="https://code.visualstudio.com/docs/remote/remote-overview">Remote Editing</a>.</p>
-<h2 id="remote-tcp-support"><a class="header" href="#remote-tcp-support">Remote TCP Support</a></h2>
-<p>Neovide supports connecting to a remote instance of Neovim over a TCP socket via the <code>--remote-tcp</code>
-command argument. This would allow you to run Neovim on a remote machine and use the GUI on your
-local machine, connecting over the network.</p>
+<h2 id="connecting-to-an-existing-neovim-instance"><a class="header" href="#connecting-to-an-existing-neovim-instance">Connecting to an existing Neovim instance</a></h2>
+<p>Neovide supports connecting to an already running instance of Neovim through the following
+communication channels:</p>
+<ul>
+<li>TCP</li>
+<li>Unix domain sockets (Unix-like platforms only)</li>
+<li>Named pipes (Windows only)</li>
+</ul>
+<p>This is enabled by specifying the <code>--server &lt;address&gt;</code> command line argument. The <code>address</code> is
+interpreted as a TCP/IPv4/IPv6 address if it contains a colon <code>:</code>. Otherwise, it's
+interpreted as a Unix domain socket path on Unix-like systems and as the name of a pipe on
+Windows systems.</p>
+<p>It's possible to quit the GUI while leaving the Neovim instance running by closing the Neovide
+application window instead of issuing a <code>:q</code> command.</p>
+<p>One use case is to attach a GUI running on a local machine to a Neovim instance on a remote machine
+over the network.</p>
+<h3 id="tcp-example"><a class="header" href="#tcp-example">TCP Example</a></h3>
+<p>Note that exposing Neovim over TCP, even on localhost, is inherently less secure than using Unix
+Domain Sockets.</p>
 <p>Launch Neovim as a TCP server (on port 6666) by running:</p>
 <pre><code class="language-sh">nvim --headless --listen localhost:6666
 </code></pre>
 <p>And then connect to it using:</p>
-<pre><code class="language-sh">/path/to/neovide --remote-tcp=localhost:6666
+<pre><code class="language-sh">/path/to/neovide --server=localhost:6666
 </code></pre>
 <p>By specifying to listen on localhost, you only allow connections from your local computer. If you
 are actually doing this over a network you will want to use SSH port forwarding for security, and
 then connect as before.</p>
 <pre><code class="language-sh">ssh -L 6666:localhost:6666 ip.of.other.machine nvim --headless --listen localhost:6666
 </code></pre>
-<p>Finally, if you would like to leave the neovim server running, close the neovide application window
-instead of issuing a <code>:q</code> command.</p>
+<h3 id="unix-domain-socket-example"><a class="header" href="#unix-domain-socket-example">Unix Domain Socket Example</a></h3>
+<p>Launch a Neovim instance listening on a Unix Domain Socket:</p>
+<pre><code class="language-sh">nvim --headless --listen some-existing-dir/my-nvim-instance.sock
+</code></pre>
+<p>And then connect to it using:</p>
+<pre><code class="language-sh">/path/to/neovide --server=some-existing-dir/my-nvim-instance.sock
+</code></pre>
+<p>Like TCP sockets, Unix Domain Sockets can be forwarded over SSH. Start a Neovim instance on another
+host with:</p>
+<pre><code class="language-sh">ssh -L /path/to/local/socket:/path/to/remote/socket ip.of.other.machine \
+    nvim --headless --listen /path/to/remote/socket
+</code></pre>
+<p>Then connect with:</p>
+<pre><code class="language-sh">/path/to/neovide --server=/path/to/local/socket
+</code></pre>
+<h3 id="windows-named-pipes-example"><a class="header" href="#windows-named-pipes-example">Windows Named Pipes Example</a></h3>
+<p>Launch a Neovim instances listening on a Named Pipe:</p>
+<pre><code class="language-cmd">nvim --headless --listen //./pipe/some-known-pipe-name/with-optional-path
+</code></pre>
+<p>And then connect to it using:</p>
+<pre><code class="language-cmd">/path/to/neovide --server=some-known-pipe-name/with-optional-path
+</code></pre>
+<p>Note: the pipe name passed to nvim must be prefixed with <code>//./pipe/</code> but the server argument to
+Neovide will add it if it is missing.</p>
 <h2 id="some-nonsense-"><a class="header" href="#some-nonsense-">Some Nonsense ;)</a></h2>
 <p>To learn how to configure the following, head on over to the
 <a href="./configuration.html#cursor-particles">configuration</a> section!</p>
@@ -340,7 +377,7 @@ bundle:</p>
 <p><code>cargo bundle --release</code></p>
 </li>
 <li>
-<p>Copy <code>./target/release/bundle/osx/neovide.app</code> to <code>~/Applications</code> and enjoy.</p>
+<p><code>cp -r ./target/release/bundle/osx/Neovide.app /Applications/Neovide.app</code> and enjoy.</p>
 </li>
 </ol>
 <h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
@@ -421,7 +458,7 @@ end
 <pre><code class="language-vim">set guifont=Source\ Code\ Pro:h14
 </code></pre>
 <p>Lua:</p>
-<pre><code class="language-lua">vim.opt.guifont = { &quot;Source Code Pro&quot;, &quot;h14&quot; } -- text below applies for VimScript
+<pre><code class="language-lua">vim.o.guifont = &quot;Source Code Pro:h14&quot; -- text below applies for VimScript
 </code></pre>
 <p>Controls the font used by Neovide. Only setting which is actually controlled through an option, and
 as such it's also documented in <code>:h guifont</code>. But to sum it up and also add Neovide's extension:</p>
@@ -474,6 +511,14 @@ should Hack fail to contain any glyph.</li>
 </ul>
 </li>
 </ul>
+<h4 id="line-spacing"><a class="header" href="#line-spacing">Line spacing</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">set linespace=0
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.opt.linespace = 0
+</code></pre>
+<p>Controls spacing between lines, may also be negative.</p>
 <h4 id="scale"><a class="header" href="#scale">Scale</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_scale_factor = 1.0
@@ -485,6 +530,22 @@ should Hack fail to contain any glyph.</li>
 <p>In addition to setting the font itself, this setting allows to change the scale without changing the
 whole font definition. Very useful for presentations. See <a href="faq.html#how-can-i-dynamically-change-the-scale-at-runtime">the FAQ section about
 this</a> for a nice recipe to bind this to a hotkey.</p>
+<h4 id="padding"><a class="header" href="#padding">Padding</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_padding_top = 0
+let g:neovide_padding_bottom = 0
+let g:neovide_padding_right = 0
+let g:neovide_padding_left = 0
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_padding_top = 0
+vim.g.neovide_padding_bottom = 0
+vim.g.neovide_padding_right = 0
+vim.g.neovide_padding_left = 0
+</code></pre>
+<p><strong>Available since 0.10.4.</strong></p>
+<p>Controls the space between the window border and the actual Neovim, which is filled with the
+background color instead.</p>
 <h4 id="background-color-currently-macos-only"><a class="header" href="#background-color-currently-macos-only">Background Color (Currently macOS only)</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">&quot; g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
@@ -495,7 +556,7 @@ let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transpa
 <p>Lua:</p>
 <pre><code class="language-lua">-- Helper function for transparency formatting
 local alpha = function()
-  return string.format(&quot;%x&quot;, math.floor(255 * vim.g.neovide_transparency_point or 0.8))
+  return string.format(&quot;%x&quot;, math.floor(255 * vim.g.transparency or 0.8))
 end
 -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 vim.g.neovide_transparency = 0.0
@@ -582,8 +643,8 @@ not mean better FPS.</p>
 <pre><code class="language-lua">vim.g.neovide_refresh_rate_idle = 5
 </code></pre>
 <p><strong>Available since 0.10.</strong></p>
-<p>Setting <code>g:neovide_refresh_rate_idle</code> to a positive integer will set the refresh rate of the app when
-it is not in focus.</p>
+<p>Setting <code>g:neovide_refresh_rate_idle</code> to a positive integer will set the refresh rate of the app
+when it is not in focus.</p>
 <p>This might not have an effect on every platform (e.g. Wayland).</p>
 <h4 id="no-idle"><a class="header" href="#no-idle">No Idle</a></h4>
 <p>VimScript:</p>
@@ -622,7 +683,7 @@ want quick window switching.</p>
 </code></pre>
 <p>Setting <code>g:neovide_remember_window_size</code> to a boolean value will determine whether the window size
 from the previous session or the default size will be used on startup. The commandline option
-<code>--geometry</code> will take priority over this value.</p>
+<code>--size</code> will take priority over this value.</p>
 <h4 id="profiler"><a class="header" href="#profiler">Profiler</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_profiler = v:false
@@ -719,6 +780,25 @@ front edge.</p>
 <pre><code class="language-lua">vim.g.neovide_cursor_antialiasing = true
 </code></pre>
 <p>Enables or disables antialiasing of the cursor quad. Disabling may fix some cursor visual issues.</p>
+<h4 id="animate-in-insert-mode"><a class="header" href="#animate-in-insert-mode">Animate in insert mode</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_cursor_animate_in_insert_mode = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_cursor_animate_in_insert_mode = true
+</code></pre>
+<p>If disabled, when in insert mode (mostly through <code>i</code> or <code>a</code>), the cursor will move like in other
+programs and immediately jump to its new position.</p>
+<h4 id="animate-switch-to-command-line"><a class="header" href="#animate-switch-to-command-line">Animate switch to command line</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_cursor_animate_command_line = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_cursor_animate_command_line = true
+</code></pre>
+<p>If disabled, the switch from editor window to command line is non-animated, and the cursor jumps
+between command line and editor window immediately. Does <strong>not</strong> influence animation inside of the
+command line.</p>
 <h4 id="unfocused-outline-width"><a class="header" href="#unfocused-outline-width">Unfocused Outline Width</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_cursor_unfocused_outline_width = 0.125
@@ -843,6 +923,9 @@ particles rotate in accordance to each other, the lower, the more line-wise all 
 <p>Only for the <code>railgun</code> vfx mode.</p>
 <p>Sets the velocity rotation speed of particles. The higher, the less particles actually move and look
 more &quot;nervous&quot;, the lower, the more it looks like a collapsing sine wave.</p>
+<!--
+  vim: textwidth=100
+-->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-reference"><a class="header" href="#command-line-reference">Command Line Reference</a></h1>
 <p>Neovide supports a few command line arguments for effecting things which couldn't be set using
 normal vim variables.</p>
@@ -868,10 +951,10 @@ settings only require it to be set in some way, some settings also use the conte
 <li>(macOS only) <code>transparent</code>: Transparent decorations including a transparent bar.</li>
 <li>(macOS only) <code>buttonless</code>: All decorations, but without quit, minimize or fullscreen buttons.</li>
 </ul>
-<h3 id="geometry"><a class="header" href="#geometry">Geometry</a></h3>
-<pre><code class="language-sh">--geometry=&lt;width&gt;x&lt;height&gt;
+<h3 id="window-size"><a class="header" href="#window-size">Window Size</a></h3>
+<pre><code class="language-sh">--size=&lt;width&gt;x&lt;height&gt;
 </code></pre>
-<p>Sets the initial neovide window size in characters.</p>
+<p>Sets the initial neovide window size in pixels.</p>
 <h3 id="log-file"><a class="header" href="#log-file">Log File</a></h3>
 <pre><code class="language-sh">--log
 </code></pre>
@@ -919,10 +1002,10 @@ or not.</p>
 </code></pre>
 <p><strong>Available since 0.10.2.</strong></p>
 <p>By default, Neovide requests to use VSync on the created window. This option disables this behavior.</p>
-<h3 id="remote-tcp"><a class="header" href="#remote-tcp">Remote TCP</a></h3>
-<pre><code class="language-sh">--remote-tcp &lt;remote_tcp&gt;
+<h3 id="neovim-server"><a class="header" href="#neovim-server">Neovim Server</a></h3>
+<pre><code class="language-sh">--server &lt;ADDRESS&gt;
 </code></pre>
-<p>What IP and port to use when connecting to neovim.</p>
+<p>Connects to the named pipe or socket at ADDRESS.</p>
 <h3 id="wsl"><a class="header" href="#wsl">WSL</a></h3>
 <pre><code class="language-sh">--wsl
 </code></pre>
@@ -957,12 +1040,13 @@ before startup by <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">for
 <p>Should Neovide happen not to start at all, check the following:</p>
 <ul>
 <li>
-<p>if you're using zsh <code>~/.zshenv</code>, <code>~/.zprofile</code> and  <code>~/.zlogin</code>, or whatever the equivalent for
-your shell is if anything emits output during shell startup, since Neovide uses your shell to
-find <code>nvim</code>. You can instead use <code>~/.zshrc</code>.</p>
+<p>Shell startup files if they output anything during startup, like <code>neofetch</code> or <code>echo</code>.
+Neovide uses your shell to find <code>nvim</code> and can't know the difference bewteen output and
+<code>nvim</code>'s path. You can use your resource file (in the case of zsh <code>~/.zshrc</code>) instead for
+such commands.</p>
 </li>
 <li>
-<p>whether you can reproduce this by running from the latest git main commit.
+<p>Whether or not you can reproduce this by running from the latest git main commit.
 This can be done by running from source or just grabbing the binary from the <a href="https://github.com/neovide/neovide/actions/workflows/build.yml"><code>Actions</code> tab on
 GitHub</a>.</p>
 </li>
@@ -1013,12 +1097,12 @@ your terminal adds these keybindings, as neovim doesn't have them by default. We
 this behavior by adding keybindings in neovim.</p>
 <pre><code class="language-lua">if vim.g.neovide then
   vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
-  vim.keymap.set.map('n', '&lt;D-s&gt;', ':w&lt;CR&gt;') -- Save
-  vim.keymap.set.map('v', '&lt;D-c&gt;', '&quot;+y') -- Copy
-  vim.keymap.set.map('n', '&lt;D-v&gt;', '&quot;+P') -- Paste normal mode
-  vim.keymap.set.map('v', '&lt;D-v&gt;', '&quot;+P') -- Paste visual mode
-  vim.keymap.set.map('c', '&lt;D-v&gt;', '&lt;C-R&gt;+') -- Paste command mode
-  vim.keymap.set.map('i', '&lt;D-v&gt;', '&lt;ESC&gt;l&quot;+Pli') -- Paste insert mode
+  vim.keymap.set('n', '&lt;D-s&gt;', ':w&lt;CR&gt;') -- Save
+  vim.keymap.set('v', '&lt;D-c&gt;', '&quot;+y') -- Copy
+  vim.keymap.set('n', '&lt;D-v&gt;', '&quot;+P') -- Paste normal mode
+  vim.keymap.set('v', '&lt;D-v&gt;', '&quot;+P') -- Paste visual mode
+  vim.keymap.set('c', '&lt;D-v&gt;', '&lt;C-R&gt;+') -- Paste command mode
+  vim.keymap.set('i', '&lt;D-v&gt;', '&lt;ESC&gt;l&quot;+Pli') -- Paste insert mode
 end
 
 -- Allow clipboard copy paste in neovim
