@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">4.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">5.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">6.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">7.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">8.</strong> Maintainer Cookbook</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">4.</strong> Commands</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">5.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="config-file.html"><strong aria-hidden="true">6.</strong> Config File</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">7.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">8.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">9.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">10.</strong> Maintainer Cookbook</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,7 +149,7 @@
     <a href="https://discord.gg/SjFpZdQys6">
         <img src="https://badgen.net/badge/icon/discord?icon=discord&label" alt="Discord">
     </a>
-    <a href="https://matrix.to/#/#neovide_community:gitter.im">
+    <a href="https://matrix.to/#/#neovide:matrix.org">
         <img src="https://matrix.to/img/matrix-badge.svg" alt="Chat On Matrix">
     </a>
     <a href="https://github.com/neovide/neovide/discussions">
@@ -161,7 +161,7 @@
         <a href="https://discord.gg/SjFpZdQys6">
             <img src="https://badgen.net/badge/icon/discord?icon=discord&label" alt="Discord">
         </a>
-        <a href="https://matrix.to/#/#neovide_community:gitter.im">
+        <a href="https://matrix.to/#/#neovide:matrix.org">
             <img src="https://matrix.to/img/matrix-badge.svg" alt="Chat On Matrix">
         </a>
         <a href="https://github.com/neovide/neovide/discussions">
@@ -177,13 +177,13 @@
 Where possible there are some graphical improvements, but functionally it should act like the
 terminal UI.</p>
 <div class="hide-mobile">
-    <a href="https://github.com/neovide/neovide/releases/latest/download/Neovide.dmg.zip">
+    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.dmg.zip">
         <button class="button-hover color">Download for macOS</button>
     </a>
-    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.msi.zip">
+    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.msi">
         <button class="button-hover color">Download for Windows</button>
     </a>
-    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.tar.gz">
+    <a href="https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage">
         <button class="button-hover color">Download for Linux</button>
     </a>
 </div>
@@ -209,16 +209,13 @@ listed below :)</p>
 <h2 id="smooth-scrolling"><a class="header" href="#smooth-scrolling">Smooth Scrolling</a></h2>
 <p>Scroll operations on buffers in neovim will be animated smoothly pixel wise rather than line by line
 at a time.</p>
-<p>Note: <a href="command-line-reference.html#multigrid">multigrid</a> must be enabled for this to work.</p>
 <img src="./assets/SmoothScrolling.gif" alt="Smooth Scrolling" width=550>
 <h2 id="animated-windows"><a class="header" href="#animated-windows">Animated Windows</a></h2>
 <p>Windows animate into position when they are moved making it easier to see how layout changes happen.</p>
-<p>Note: <a href="command-line-reference.html#multigrid">multigrid</a> must be enabled for this to work.</p>
 <img src="./assets/AnimatedWindows.gif" alt="Animated Windows" width=550>
 <h2 id="blurred-floating-windows"><a class="header" href="#blurred-floating-windows">Blurred Floating Windows</a></h2>
 <p>The backgrounds of floating windows are blurred improving the visual separation between foreground
 and background from built in window transparency.</p>
-<p>Note: <a href="command-line-reference.html#multigrid">multigrid</a> must be enabled for this to work.</p>
 <img src="./assets/BlurredFloatingWindows.png" alt="Blurred Floating Windows" width=550>
 <h2 id="emoji-support"><a class="header" href="#emoji-support">Emoji Support</a></h2>
 <p>Font fallback supports rendering of emoji not contained in the configured font.</p>
@@ -348,6 +345,12 @@ $ scoop install neovide
 line:</p>
 <pre><code class="language-sh">brew install --cask neovide
 </code></pre>
+<p>Neovide registers launched shells taking the user's preferred shell into account.</p>
+<p>If you are encountering issues with Neovide not being found by your shell, you can try to add the
+<code>brew</code> binary path to your <code>PATH</code> environment variable:</p>
+<pre><code class="language-sh">sudo launchctl config user path &quot;$(brew --prefix)/bin:${PATH}&quot;
+</code></pre>
+<p>For more information, see the Homebrew <a href="https://docs.brew.sh/FAQ#my-mac-apps-dont-find-homebrew-utilities">FAQ</a>.</p>
 <h3 id="mac-source"><a class="header" href="#mac-source">Mac Source</a></h3>
 <ol>
 <li>
@@ -383,8 +386,11 @@ bundle:</p>
 <h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
 <h3 id="arch-linux"><a class="header" href="#arch-linux">Arch Linux</a></h3>
 <p>Stable releases are
-<a href="https://archlinux.org/packages/community/x86_64/neovide">packaged in the community repository</a>.</p>
+<a href="https://archlinux.org/packages/extra/x86_64/neovide">packaged in the extra repository</a>.</p>
 <pre><code class="language-sh">pacman -S neovide
+</code></pre>
+<p>If you want to run Neovide on X11, you'll also need <code>libxkbcommon-x11</code>.</p>
+<pre><code class="language-sh">pacman -S libxkbcommon-x11
 </code></pre>
 <p>To run a development version you can build from
 <a href="https://aur.archlinux.org/packages/neovide-git">the VCS package in the AUR</a>. This can be built and
@@ -392,6 +398,17 @@ installed using an AUR helper or
 <a href="https://wiki.archlinux.org/title/Arch_User_Repository#Installing_and_upgrading_packages">by hand in the usual way</a>.
 To build from a non-default branch you can edit the PKGBUILD and add <code>#branch-name</code> to the end of
 the source URL.</p>
+<h3 id="nix"><a class="header" href="#nix">Nix</a></h3>
+<p>Stable releases are packaged in nixpkgs in the <code>neovide</code> package, there's no flake. As such, if you
+just want to try it out in a transient shell, you can use this command.</p>
+<p><strong>Note</strong>: On non-NixOS systems, chances are you'll need to use
+<a href="https://github.com/nix-community/nixGL">nixGL</a> as wrapper for neovide.</p>
+<pre><code class="language-sh">nix-shell -p neovide
+</code></pre>
+<h4 id="nixos"><a class="header" href="#nixos">NixOS</a></h4>
+<p>Just add <code>neovide</code> from nixpkgs to your <code>environment.systemPackages</code> in <code>configuration.nix</code>.</p>
+<pre><code class="language-nix">environment.systemPackages = with pkgs; [neovide];
+</code></pre>
 <h3 id="snap"><a class="header" href="#snap">Snap</a></h3>
 <p>Neovide is also available in the Snap Store. You can install it using the command below.</p>
 <pre><code class="language-sh">snap install neovide
@@ -417,6 +434,13 @@ stuff is already installed, just try building and see)</p>
 <p>Fedora</p>
 <pre><code class="language-sh">sudo dnf install fontconfig-devel freetype-devel libX11-xcb libX11-devel libstdc++-static libstdc++-devel
 sudo dnf groupinstall &quot;Development Tools&quot; &quot;Development Libraries&quot;
+</code></pre>
+</li>
+<li>
+<p>Arch</p>
+<p>Do note that an <a href="https://aur.archlinux.org/packages/neovide-git">AUR package</a> already exists.</p>
+<pre><code class="language-sh">sudo pacman -S base-devel fontconfig freetype2 libglvnd sndio cmake \
+    git gtk3 python sdl2 vulkan-intel libxkbcommon-x11
 </code></pre>
 </li>
 </ul>
@@ -460,7 +484,8 @@ end
 <p>Lua:</p>
 <pre><code class="language-lua">vim.o.guifont = &quot;Source Code Pro:h14&quot; -- text below applies for VimScript
 </code></pre>
-<p>Controls the font used by Neovide. Only setting which is actually controlled through an option, and
+<p>Controls the font used by Neovide. Also check <a href="./config-file.html">the config file</a> to see how to
+configure features. This is the only setting which is actually controlled through an option, and
 as such it's also documented in <code>:h guifont</code>. But to sum it up and also add Neovide's extension:</p>
 <ul>
 <li>The basic format is <code>Primary\ Font,Fallback\ Font\ 1,Fallback\ Font\ 2:option1:option2:option3</code>,
@@ -479,6 +504,9 @@ while you can have as many fallback fonts as you want (even 0) and as many optio
 <li>can be one of the following:
 <ul>
 <li><code>hX</code> — Sets the font size to <code>X</code> points, while <code>X</code> can be any (even floating-point) number.</li>
+<li><code>wX</code> (available since 0.11.2) — Sets the width <strong>relative offset</strong> to be <code>X</code> points, while <code>X</code>
+can be again any number. Negative values shift characters closer together, positive values
+shift them further apart.</li>
 <li><code>b</code> — Sets the font <strong>bold</strong>.</li>
 <li><code>i</code> — Sets the font <em>italic</em>.</li>
 <li><code>#e-X</code> (available since 0.10.2) — Sets edge pixels to be drawn opaquely or
@@ -546,7 +574,11 @@ vim.g.neovide_padding_left = 0
 <p><strong>Available since 0.10.4.</strong></p>
 <p>Controls the space between the window border and the actual Neovim, which is filled with the
 background color instead.</p>
-<h4 id="background-color-currently-macos-only"><a class="header" href="#background-color-currently-macos-only">Background Color (Currently macOS only)</a></h4>
+<h4 id="background-color-deprecated-currently-macos-only"><a class="header" href="#background-color-deprecated-currently-macos-only">Background Color (<strong>Deprecated</strong>, Currently macOS only)</a></h4>
+<p>This configuration is deprecated now and might be removed in the future. In
+<a href="https://github.com/neovide/neovide/issues/2168">#2168</a>, we have made Neovide control the title bar
+color itself. The color of title bar now honors <a href="configuration.html#transparency"><code>neovide_transparency</code></a>. If you want
+a transparent title bar, setting <code>neovide_transparency</code> is sufficient.</p>
 <p>VimScript:</p>
 <pre><code class="language-vim">&quot; g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 let g:neovide_transparency = 0.0
@@ -563,13 +595,24 @@ vim.g.neovide_transparency = 0.0
 vim.g.transparency = 0.8
 vim.g.neovide_background_color = &quot;#0f1117&quot; .. alpha()
 </code></pre>
-<p><strong>Available since 0.10.</strong></p>
+<p><strong>Available since 0.10.</strong>
+<strong>Deprecated in 0.12.2.</strong></p>
 <p><img src="assets/BackgroundColor.png" alt="BackgroundColor" /></p>
 <p>Setting <code>g:neovide_background_color</code> to a value that can be parsed by
 <a href="https://github.com/mazznoer/csscolorparser-rs">csscolorparser-rs</a> will set the color of the whole
 window to that value.</p>
 <p>Note that <code>g:neovide_transparency</code> should be 0 if you want to unify transparency of content and
 title bar.</p>
+<h4 id="window-blur-currently-macos-only"><a class="header" href="#window-blur-currently-macos-only">Window Blur (Currently macOS only)</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_window_blurred = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_window_blurred = true
+</code></pre>
+<p><strong>Available since 0.12.</strong></p>
+<p>Setting <code>g:neovide_window_blurred</code> toggles the window blur state.</p>
+<p>The blurred level respects the <code>g:neovide_transparency</code> value between 0.0 and 1.0.</p>
 <h4 id="floating-blur-amount"><a class="header" href="#floating-blur-amount">Floating Blur Amount</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_floating_blur_amount_x = 2.0
@@ -582,6 +625,27 @@ vim.g.neovide_floating_blur_amount_y = 2.0
 <p><strong>Available since 0.9.</strong></p>
 <p>Setting <code>g:neovide_floating_blur_amount_x</code> and <code>g:neovide_floating_blur_amount_y</code> controls the blur
 radius on the respective axis for floating windows.</p>
+<h4 id="floating-shadow"><a class="header" href="#floating-shadow">Floating Shadow</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_floating_shadow = v:true
+let g:neovide_floating_z_height = 10
+let g:neovide_light_angle_degrees = 45
+let g:neovide_light_radius = 5
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_floating_shadow = true
+vim.g.neovide_floating_z_height = 10
+vim.g.neovide_light_angle_degrees = 45
+vim.g.neovide_light_radius = 5
+</code></pre>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Setting <code>g:neovide_floating_shadow</code> to false will disable the shadow borders for floating windows.
+The other variables configure the shadow in various ways:</p>
+<ul>
+<li><code>g:neovide_floating_z_height</code> sets the virtual height of the floating window from the ground plane</li>
+<li><code>g:neovide_light_angle_degrees</code> sets the angle from the screen normal of the casting light</li>
+<li><code>g:neovide_light_radius</code> sets the radius of the casting light</li>
+</ul>
 <h4 id="transparency"><a class="header" href="#transparency">Transparency</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_transparency = 0.8
@@ -592,6 +656,15 @@ radius on the respective axis for floating windows.</p>
 <p><img src="assets/Transparency.png" alt="Transparency" /></p>
 <p>Setting <code>g:neovide_transparency</code> to a value between 0.0 and 1.0 will set the opacity of the window
 to that value.</p>
+<h4 id="show-border-currently-macos-only"><a class="header" href="#show-border-currently-macos-only">Show Border (Currently macOS only)</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_show_border = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_show_border = true
+</code></pre>
+<p>Draw a grey border around opaque windows only.</p>
+<p>Default: <code>false</code></p>
 <h4 id="scroll-animation-length"><a class="header" href="#scroll-animation-length">Scroll Animation Length</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_scroll_animation_length = 0.3
@@ -599,7 +672,20 @@ to that value.</p>
 <p>Lua:</p>
 <pre><code class="language-lua">vim.g.neovide_scroll_animation_length = 0.3
 </code></pre>
-<p>Sets how long the scroll animation takes to complete, measured in seconds.</p>
+<p>Sets how long the scroll animation takes to complete, measured in seconds. Note that the timing is
+not completely accurate and might depend slightly on have far you scroll, so experimenting is
+encouraged in order to tune it to your liking.</p>
+<h4 id="far-scroll-lines"><a class="header" href="#far-scroll-lines">Far scroll lines</a></h4>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_scroll_animation_far_lines = 1
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_scroll_animation_far_lines = 1
+</code></pre>
+<p>When scrolling more than one screen at a time, only this many lines at the end of the scroll action
+will be animated. Set it to 0 to snap to the final position without any animation, or to something
+big like 9999 to always scroll the whole screen, much like Neovide &lt;= 0.10.4 did.</p>
 <h4 id="hiding-the-mouse-when-typing"><a class="header" href="#hiding-the-mouse-when-typing">Hiding the mouse when typing</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_hide_mouse_when_typing = v:false
@@ -612,17 +698,41 @@ only affects the mouse if it is currently within the bounds of the neovide windo
 mouse makes it visible again.</p>
 <h4 id="underline-automatic-scaling"><a class="header" href="#underline-automatic-scaling">Underline automatic scaling</a></h4>
 <p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_underline_automatic_scaling = v:false
+<pre><code class="language-vim">let g:neovide_underline_stroke_scale = 1.0
 </code></pre>
 <p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_underline_automatic_scaling = false
+<pre><code class="language-lua">vim.g.neovide_underline_stroke_scale = 1.0
 </code></pre>
-<p><strong>Available since 0.10.</strong></p>
-<p>Setting <code>g:neovide_underline_automatic_scaling</code> to a boolean value determines whether automatic
-scaling of text underlines (including undercurl, underdash, etc.) is enabled. Noticeable for font
-sizes above 15.</p>
-<p><strong>Note</strong>: This is currently glitchy, and leads to some underlines being clipped by the line of text
-below.</p>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Setting <code>g:neovide_underline_stroke_scale</code> to a floating point will increase or decrease the stroke
+width of the underlines (including undercurl, underdash, etc.). If the scaled stroke width is less
+than 1, it is clamped to 1 to prevent strange aliasing.</p>
+<p><strong>Note</strong>: This is currently glitchy if the scale is too large, and leads to some underlines being
+clipped by the line of text below.</p>
+<h4 id="theme"><a class="header" href="#theme">Theme</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_theme = 'auto'
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_theme = 'auto'
+</code></pre>
+<p><strong>Available since 0.11.0.</strong></p>
+<p>Set the <a href="https://neovim.io/doc/user/options.html#&#x27;background&#x27;"><code>background</code></a> option when Neovide
+starts. Possible values: <em>light</em>, <em>dark</em>, <em>auto</em>. On systems that support it, <em>auto</em> will mirror the
+system theme, and will update <code>background</code> when the system theme changes.</p>
+<h4 id="fix-border-and-winbar-scrolling-glitches"><a class="header" href="#fix-border-and-winbar-scrolling-glitches">Fix border and winbar scrolling glitches</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_unlink_border_highlights = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_unlink_border_highlights = true
+</code></pre>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Neovide uses some highlight groups for detecting the border of the windows, when scrolling. This
+detection is not perfect due to some limitations of Neovim, it only returns the final highlight
+groups for linked highlights. This option unlinks those highlight groups after the color scheme is
+loaded to make Neovide detect them properly.</p>
+<p>If this causes other problems, you can set this option to false.</p>
 <h3 id="functionality"><a class="header" href="#functionality">Functionality</a></h3>
 <h4 id="refresh-rate"><a class="header" href="#refresh-rate">Refresh Rate</a></h4>
 <p>VimScript:</p>
@@ -633,8 +743,8 @@ below.</p>
 </code></pre>
 <p>Setting <code>g:neovide_refresh_rate</code> to a positive integer will set the refresh rate of the app. This is
 limited by the refresh rate of your physical hardware, but can be lowered to increase battery life.</p>
-<p>Also do note that Neovide's frame pacing is far from optimal at the moment, so better hardware might
-not mean better FPS.</p>
+<p>This setting is only effective when not using vsync, for example by passing <code>--no-vsync</code> on the
+commandline.</p>
 <h4 id="idle-refresh-rate"><a class="header" href="#idle-refresh-rate">Idle Refresh Rate</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_refresh_rate_idle = 5
@@ -694,30 +804,58 @@ from the previous session or the default size will be used on startup. The comma
 <p>Setting this to <code>v:true</code> enables the profiler, which shows a frametime graph in the upper left
 corner.</p>
 <h3 id="input-settings"><a class="header" href="#input-settings">Input Settings</a></h3>
-<h4 id="use-logo-key"><a class="header" href="#use-logo-key">Use Logo Key</a></h4>
+<h4 id="macos-option-key-is-meta"><a class="header" href="#macos-option-key-is-meta">macOS Option Key is Meta</a></h4>
+<p>Possible values are <code>both</code>, <code>only_left</code>, <code>only_right</code>, <code>none</code>. Set to <code>none</code> by default.</p>
 <p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_input_use_logo = v:false  &quot; v:true on macOS
+<pre><code class="language-vim">let g:neovide_input_macos_option_key_is_meta = 'only_left'
 </code></pre>
 <p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_input_use_logo = false    -- true on macOS
-</code></pre>
-<p>Setting <code>g:neovide_input_use_logo</code> to a boolean value will change how logo key (also known as
-<a href="https://en.wikipedia.org/wiki/Super_key_(keyboard_button)">super key</a>,
-<a href="https://en.wikipedia.org/wiki/Command_key">command key</a> or
-<a href="https://en.wikipedia.org/wiki/Windows_key">windows key</a>) is handled, allowing all key combinations
-containing logo to be forwarded to neovim. On MacOS, this defaults to <code>true</code> (so that e.g. <code>cmd+v</code>
-works for pasting with respective setup of <code>init.vim</code>), and to <code>false</code> for other platforms (that
-typically use e.g. <code>ctrl+v</code> for pasting).</p>
-<h4 id="macos-alt-is-meta"><a class="header" href="#macos-alt-is-meta">macOS Alt is Meta</a></h4>
-<p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_input_macos_alt_is_meta = v:false
-</code></pre>
-<p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_input_macos_alt_is_meta = false
+<pre><code class="language-lua">vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
 </code></pre>
 <p><strong>Available since 0.10.</strong></p>
 <p>Interprets <kbd>Alt</kbd> + <kbd>whatever</kbd> actually as <code>&lt;M-whatever&gt;</code>, instead of sending the
 actual special character to Neovim.</p>
+<h4 id="ime"><a class="header" href="#ime">IME</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_input_ime = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_input_ime = true
+</code></pre>
+<p><strong>Available since 0.11.0.</strong></p>
+<p>This lets you disable the IME input. For example, to only enables IME in input mode and when
+searching, so that you can navigate normally, when typing some East Asian languages, you can add
+a few auto commands:</p>
+<pre><code class="language-vim">augroup ime_input
+    autocmd!
+    autocmd InsertLeave * execute &quot;let g:neovide_input_ime=v:false&quot;
+    autocmd InsertEnter * execute &quot;let g:neovide_input_ime=v:true&quot;
+    autocmd CmdlineEnter [/\?] execute &quot;let g:neovide_input_ime=v:false&quot;
+    autocmd CmdlineLeave [/\?] execute &quot;let g:neovide_input_ime=v:true&quot;
+augroup END
+</code></pre>
+<pre><code class="language-lua">local function set_ime(args)
+    if args.event:match(&quot;Enter$&quot;) then
+        vim.g.neovide_input_ime = true
+    else
+        vim.g.neovide_input_ime = false
+    end
+end
+
+local ime_input = vim.api.nvim_create_augroup(&quot;ime_input&quot;, { clear = true })
+
+vim.api.nvim_create_autocmd({ &quot;InsertEnter&quot;, &quot;InsertLeave&quot; }, {
+    group = ime_input,
+    pattern = &quot;*&quot;,
+    callback = set_ime
+})
+
+vim.api.nvim_create_autocmd({ &quot;CmdlineEnter&quot;, &quot;CmdlineLeave&quot; }, {
+    group = ime_input,
+    pattern = &quot;[/\\?]&quot;,
+    callback = set_ime
+})
+</code></pre>
 <h4 id="touch-deadzone"><a class="header" href="#touch-deadzone">Touch Deadzone</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_touch_deadzone = 6.0
@@ -810,6 +948,16 @@ command line.</p>
 If the value is &lt;=0 then the cursor will be invisible. This setting takes effect when the editor
 window is unfocused, at which time a block cursor will be rendered as an outline instead of as a
 full rectangle.</p>
+<h4 id="animate-cursor-blink"><a class="header" href="#animate-cursor-blink">Animate cursor blink</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_cursor_smooth_blink = v:false
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_cursor_smooth_blink = false
+</code></pre>
+<p>If enabled, the cursor will smoothly animate the transition between the cursor's on and off state.
+The built in <code>guicursor</code> neovim option needs to be configured to enable blinking by having a value
+set for both <code>blinkoff</code>, <code>blinkon</code> and <code>blinkwait</code> for this setting to apply.</p>
 <h3 id="cursor-particles"><a class="header" href="#cursor-particles">Cursor Particles</a></h3>
 <p>There are a number of vfx modes you can enable which produce particles behind the cursor. These are
 enabled by setting <code>g:neovide_cursor_vfx_mode</code> to one of the following constants.</p>
@@ -926,6 +1074,21 @@ more &quot;nervous&quot;, the lower, the more it looks like a collapsing sine wa
 <!--
   vim: textwidth=100
 -->
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
+<p>On startup, Neovide registers some commands for interacting
+with the os and platform window. These are neovim commands
+accessible via <code>:{command name}</code>.</p>
+<h2 id="registerunregister-right-click"><a class="header" href="#registerunregister-right-click">Register/Unregister Right Click</a></h2>
+<p>On windows you can register a right click context menu item
+to edit a given file with Neovide. This can be done at any
+time by running the <code>NeovideRegisterRightClick</code> command. This can
+be undone with the <code>NeovideUnregisterRightClick</code> command.</p>
+<h2 id="focus-window"><a class="header" href="#focus-window">Focus Window</a></h2>
+<p>Running the <code>NeovideFocus</code> command will bring the platform
+window containing Neovide to the front and activate it. This
+is useful for tools like neovim_remote which can manipulate
+neovim remotely or if long running tasks would like to
+activate the Neovide window after finishing.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-reference"><a class="header" href="#command-line-reference">Command Line Reference</a></h1>
 <p>Neovide supports a few command line arguments for effecting things which couldn't be set using
 normal vim variables.</p>
@@ -955,11 +1118,7 @@ settings only require it to be set in some way, some settings also use the conte
 <pre><code class="language-sh">--size=&lt;width&gt;x&lt;height&gt;
 </code></pre>
 <p>Sets the initial neovide window size in pixels.</p>
-<h3 id="log-file"><a class="header" href="#log-file">Log File</a></h3>
-<pre><code class="language-sh">--log
-</code></pre>
-<p>Enables the log file for debugging purposes. This will write a file next to the executable
-containing trace events which may help debug an issue.</p>
+<p>Can not be used together with <code>--maximized</code>, or <code>--grid</code>.</p>
 <h3 id="maximized"><a class="header" href="#maximized">Maximized</a></h3>
 <pre><code class="language-sh">--maximized or $NEOVIDE_MAXIMIZED
 </code></pre>
@@ -967,41 +1126,78 @@ containing trace events which may help debug an issue.</p>
 visible.</p>
 <p>This is not the same as <code>g:neovide_fullscreen</code>, which runs Neovide in &quot;exclusive fullscreen&quot;,
 covering up the entire screen.</p>
+<p>Can not be used together with <code>--size</code>, or <code>--grid</code>.</p>
+<h3 id="grid-size"><a class="header" href="#grid-size">Grid Size</a></h3>
+<pre><code class="language-sh">--grid [&lt;columns&gt;x&lt;lines&gt;]
+
+</code></pre>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Sets the initial grid size of the window. If no value is given, it defaults to
+columns/lines from <code>init.vim/lua</code>, see
+<a href="https://neovim.io/doc/user/options.html#&#x27;columns&#x27;">columns</a> and
+<a href="https://neovim.io/doc/user/options.html#&#x27;lines&#x27;">lines</a>.</p>
+<p>If the <code>--grid</code> argument is not set then the grid size is inferred from the
+window size.</p>
+<p>Note: After the initial size has been determined and <code>init.vim/lua</code> processed,
+you can set <a href="https://neovim.io/doc/user/options.html#&#x27;columns&#x27;">columns</a> and
+<a href="https://neovim.io/doc/user/options.html#&#x27;lines&#x27;">lines</a> inside neovim
+regardless of the command line arguments used. This has to be done before any
+redraws are made, so it's recommended to put it at the start of the
+<code>init.vim/lua</code> along with <code>guifont</code> and other related settings that can affect
+the geometry.</p>
+<p>Can not be used together with <code>--size</code>, or <code>--maximized</code>.</p>
+<h3 id="log-file"><a class="header" href="#log-file">Log File</a></h3>
+<pre><code class="language-sh">--log
+</code></pre>
+<p>Enables the log file for debugging purposes. This will write a file next to the executable
+containing trace events which may help debug an issue.</p>
 <h3 id="multigrid"><a class="header" href="#multigrid">Multigrid</a></h3>
-<pre><code class="language-sh">--multigrid or $NEOVIDE_MULTIGRID
+<pre><code class="language-sh">--no-multigrid or $NEOVIDE_NO_MULTIGRID
 </code></pre>
-<p>This enables neovim's multigrid functionality which will also enable floating window blurred
-backgrounds and window animations. For now this is disabled due to some mouse input bugs upstream
-(<a href="https://github.com/neovim/neovim/pull/12667">neovim/neovim/pull/12667</a>,
-<a href="https://github.com/neovim/neovim/issues/15075">neovim/neovim/issues/15075</a>) and some
-<a href="https://github.com/neovide/neovide/issues/720">floating window transparency issues</a>.</p>
-<h3 id="no-fork"><a class="header" href="#no-fork">No Fork</a></h3>
-<pre><code class="language-sh">--nofork
+<p>This disables neovim's multigrid functionality which will also disable floating window blurred
+backgrounds, smooth scrolling, and window animations. This can solve some issues where neovide
+acts differently from terminal neovim.</p>
+<h3 id="fork"><a class="header" href="#fork">Fork</a></h3>
+<pre><code class="language-sh">--fork or $NEOVIDE_FORK=0|1
 </code></pre>
-<p>By default, neovide detaches itself from the terminal. Instead of spawning a child process and
-leaking it, be &quot;blocking&quot; and have the shell directly as parent process.</p>
+<p>Detach from the terminal instead of waiting for the Neovide process to
+terminate. This parameter has no effect when launching from a GUI.</p>
 <h3 id="no-idle-1"><a class="header" href="#no-idle-1">No Idle</a></h3>
-<pre><code class="language-sh">--noidle or $NEOVIDE_NO_IDLE
+<pre><code class="language-sh">--no-idle or $NEOVIDE_IDLE=0|1
 </code></pre>
-<p>Instead of skipping some frames in order to match <code>g:neovide_refresh_rate</code>, render every possible
-one.</p>
-<h3 id="no-srgb"><a class="header" href="#no-srgb">No sRGB</a></h3>
-<pre><code class="language-sh">--nosrgb or $NEOVIDE_NO_SRGB
+<p>With idle <code>on</code> (default), neovide won't render new frames when nothing is happening.</p>
+<p>With idle <code>off</code> (e.g. with <code>--no-idle</code> flag), neovide will constantly render new frames,
+even when nothing changed. This takes more power and CPU time, but can possibly help
+with frame timing issues.</p>
+<h3 id="title-macos-only"><a class="header" href="#title-macos-only">Title (macOS Only)</a></h3>
+<pre><code class="language-sh">--title-hidden or $NEOVIDE_TITLE_HIDDEN
 </code></pre>
-<p>Don't request sRGB on the window. Swapping sometimes fixes startup issues.</p>
-<h3 id="no-tabs"><a class="header" href="#no-tabs">No Tabs</a></h3>
-<pre><code class="language-sh">--notabs
+<p><strong>Available since 0.12.2.</strong></p>
+<p>This sets the window title to be hidden on macOS.</p>
+<h3 id="srgb"><a class="header" href="#srgb">sRGB</a></h3>
+<pre><code class="language-sh">--no-srgb, --srgb or $NEOVIDE_SRGB=0|1
+</code></pre>
+<p>Request sRGB support on the window. Neovide does not actually render with sRGB,
+but it's still enabled by default on Windows to work around
+<a href="https://github.com/neovim/neovim/issues/907">neovim/neovim/issues/907</a>. Other
+platforms should not need it, but if you encounter either startup crashes or
+wrong colors, you can try to swap the option. The command line parameter takes
+priority over the environment variable.</p>
+<h3 id="tabs"><a class="header" href="#tabs">Tabs</a></h3>
+<pre><code class="language-sh">--no-tabs, --tabs or $NEOVIDE_TABS=0|1
 </code></pre>
 <p>By default, Neovide opens files given directly to Neovide (not NeoVim through <code>--</code>!) in multiple
-tabs to avoid confusing new users. The option disables that and makes multiple given files to normal
-buffers.</p>
+tabs to avoid confusing new users. <code>--no-tabs</code> disables this behavior.</p>
 <p>Note: Even if files are opened in tabs, they're buffers anyways. It's just about them being visible
 or not.</p>
-<h2 id="no-vsync"><a class="header" href="#no-vsync">No VSync</a></h2>
-<pre><code class="language-sh">--novsync
+<h3 id="no-vsync"><a class="header" href="#no-vsync">No VSync</a></h3>
+<pre><code class="language-sh">--no-vsync, --vsync or $NEOVIDE_VSYNC=0|1
 </code></pre>
 <p><strong>Available since 0.10.2.</strong></p>
-<p>By default, Neovide requests to use VSync on the created window. This option disables this behavior.</p>
+<p>By default, Neovide requests to use VSync on the created window. <code>--no-vsync</code>
+disables this behavior. The command line parameter takes priority over the
+environment variable. If you don't enable vsync, then <code>g:neovide_refresh_rate</code>
+will be used.</p>
 <h3 id="neovim-server"><a class="header" href="#neovim-server">Neovim Server</a></h3>
 <pre><code class="language-sh">--server &lt;ADDRESS&gt;
 </code></pre>
@@ -1023,6 +1219,101 @@ permission bit set.</p>
 </code></pre>
 <p>On Linux/Unix, this alters the identification of the window to either X11 or the more modern
 Wayland, depending on what you are running on.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="config-file"><a class="header" href="#config-file">Config File</a></h1>
+<p><strong>Available since 0.11.0.</strong></p>
+<p>Neovide also support configuration through a config file in <a href="https://toml.io">the toml format</a>.</p>
+<h2 id="settings-priority"><a class="header" href="#settings-priority">Settings priority</a></h2>
+<p>There are two types of settings:</p>
+<ol>
+<li>Settings override these settings from the environment variables, but they can be overridden
+by command line arguments.</li>
+<li>Runtime settings. These settings can be hot-reloaded in runtime.</li>
+</ol>
+<h2 id="location"><a class="header" href="#location">Location</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Platform</th><th>Location</th></tr></thead><tbody>
+<tr><td>Linux</td><td><code>$XDG_CONFIG_HOME/neovide/config.toml</code> or <code>$HOME/.config/neovide/config.toml</code></td></tr>
+<tr><td>macOS</td><td><code>$XDG_CONFIG_HOME/neovide/config.toml</code> or <code>$HOME/.config/neovide/config.toml</code></td></tr>
+<tr><td>Windows</td><td><code>{FOLDERID_RoamingAppData}/neovide/config.toml</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="available-settings"><a class="header" href="#available-settings">Available settings</a></h2>
+<p>Settings currently available in the config file with default values:</p>
+<pre><code class="language-toml">wsl = false
+no-multigrid = false
+vsync = true
+maximized = false
+srgb = false
+idle = true
+neovim-bin = &quot;/usr/bin/nvim&quot; # in reality found dynamically on $PATH if unset
+frame = &quot;full&quot;
+title-hidden = true
+tabs = true
+</code></pre>
+<p>Settings from environment variables can be found in <a href="command-line-reference.html">Command Line Reference</a>,
+see that doc for details on what those settings do.</p>
+<h3 id="runtime-settings"><a class="header" href="#runtime-settings">Runtime settings</a></h3>
+<h4 id="font-1"><a class="header" href="#font-1"><code>Font</code></a></h4>
+<p><strong>Available since 0.12.1.</strong></p>
+<p><code>[font]</code> table in configuration file contains:</p>
+<ul>
+<li><code>normal</code>: required, <code>FontDescription</code></li>
+<li><code>bold</code>: optional, <code>SecondaryFontDescription</code></li>
+<li><code>italic</code>: optional, <code>SecondaryFontDescription</code></li>
+<li><code>bold_italic</code>: optional, <code>SecondaryFontDescription</code></li>
+<li><code>features</code>: optional, <code>{ &quot;&lt;font&gt;&quot; = [&quot;&lt;string&gt;&quot;] }</code></li>
+<li><code>size</code>: required,</li>
+<li><code>width</code>: optional,</li>
+<li><code>allow_float_size</code>: optional,</li>
+<li><code>hinting</code>: optional,</li>
+<li><code>edging</code>: optional,</li>
+</ul>
+<p>Settings <code>size</code>, <code>width</code>, <code>allow_float_size</code>, <code>hinting</code> and <code>edging</code> can be found in
+<a href="configuration.html">Configuration</a>.</p>
+<ul>
+<li><code>FontDescription</code> can be:
+<ul>
+<li>a table with two keys <code>family</code> and <code>style</code>, <code>family</code> is required, <code>style</code> is optional,</li>
+<li>a string, indicate the font family,</li>
+<li>an array of string or tables in previous two forms.</li>
+</ul>
+</li>
+<li><code>SecondaryFontDescription</code> can be:
+<ul>
+<li>a table with two keys <code>family</code> and <code>style</code>, both are optional,</li>
+<li>a string, indicate the font family,</li>
+<li>an array of string or tables in previous two forms.</li>
+</ul>
+</li>
+<li>Font styles consist of zero or more space separated parts, each parts can be:
+<ul>
+<li>pre-defined style name
+<ul>
+<li>weight: <code>Thin</code>, <code>ExtraLight</code>, <code>Light</code>, <code>Normal</code>, <code>Medium</code>, <code>SemiBold</code>, <code>Bold</code>,
+<code>ExtraBold</code>, <code>Black</code>, <code>ExtraBlack</code></li>
+<li>slant: <code>Italic</code>, <code>Oblique</code></li>
+</ul>
+</li>
+<li>variable font weight: <code>W&lt;weight&gt;</code>, e.g. <code>W100</code>, <code>W200</code>, <code>W300</code>, <code>W400</code>, <code>W500</code>, <code>W600</code>,
+<code>W700</code>, <code>W800</code>, <code>W900</code></li>
+</ul>
+</li>
+<li>Font features are a table with font family as key and an array of string as value, each
+string is a font feature.
+<ul>
+<li>Font feature is a string with format <code>+&lt;feature&gt;</code>, <code>-&lt;feature&gt;</code> or <code>&lt;feature&gt;=&lt;value&gt;</code>,
+e.g. <code>+ss01</code>, <code>-calt</code>, <code>ss02=2</code>. <code>+&lt;feature&gt;</code> is a shorthand for <code>&lt;feature&gt;=1</code>,
+<code>-&lt;feature&gt;</code> is a shorthand for <code>&lt;feature&gt;=0</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-toml">[font]
+normal = [&quot;MonoLisa Nerd Font&quot;]
+size = 18
+
+[font.features]
+MonoLisa = [ &quot;+ss01&quot;, &quot;+ss07&quot;, &quot;+ss11&quot;, &quot;-calt&quot;, &quot;+ss09&quot;, &quot;+ss02&quot;, &quot;+ss14&quot;, &quot;+ss16&quot;, &quot;+ss17&quot; ]
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="editing-w-external-tools"><a class="header" href="#editing-w-external-tools">Editing w/ External Tools</a></h1>
 <p>You can use Neovide in other programs as editor, this page aims to document some quirks. Support for
 that, however, is only possible as far as reasonably debuggable.</p>
@@ -1030,7 +1321,7 @@ that, however, is only possible as far as reasonably debuggable.</p>
 your own responsibility.</em></p>
 <h2 id="jrnl"><a class="header" href="#jrnl"><a href="https://github.com/jrnl-org/jrnl">jrnl</a></a></h2>
 <p>In your configuration file:</p>
-<pre><code class="language-yaml">editor: &quot;neovide --nofork&quot;
+<pre><code class="language-yaml">editor: &quot;neovide --no-fork&quot;
 </code></pre>
 <p>...as <code>jrnl</code> saves &amp; removes the temporary file as soon as the main process exits, which happens
 before startup by <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">forking</a>.</p>
@@ -1041,7 +1332,7 @@ before startup by <a href="https://en.wikipedia.org/wiki/Fork_(system_call)">for
 <ul>
 <li>
 <p>Shell startup files if they output anything during startup, like <code>neofetch</code> or <code>echo</code>.
-Neovide uses your shell to find <code>nvim</code> and can't know the difference bewteen output and
+Neovide uses your shell to find <code>nvim</code> and can't know the difference between output and
 <code>nvim</code>'s path. You can use your resource file (in the case of zsh <code>~/.zshrc</code>) instead for
 such commands.</p>
 </li>
@@ -1071,10 +1362,10 @@ Reference issue <a href="https://github.com/neovide/neovide/pull/1242">#1242</a>
 <a href="https://github.com/neovide/neovide/issues/44#issuecomment-578618052">#44</a>.</p>
 </li>
 <li>
-<p>If your scrolling is suttering</p>
+<p>If your scrolling is stuttering</p>
 <ul>
 <li>
-<p>Add flag <code>--novsync</code> before startup as a quickfix.</p>
+<p>Add flags <code>--no-vsync</code> and <code>--no-idle</code> before startup as a quickfix.</p>
 </li>
 <li>
 <p>Check if the value of <code>g:neovide_refresh_rate</code> and the refresh rate of your monitor are matched.</p>
@@ -1089,6 +1380,57 @@ As a temporary work around, you may set <code>g:neovide_refresh_rate</code> to t
 </ul>
 </li>
 </ul>
+<h2 id="performance-profiling"><a class="header" href="#performance-profiling">Performance Profiling</a></h2>
+<p>If you encounter a performance problem like frame rate stuttering, besides attaching a log file
+when reporting bugs, <a href="https://github.com/wolfpld/tracy">tracy</a> profiling data will also be very
+useful and can usually help developers to troubleshoot the bug much faster. Here is how you can
+collect tracy data.</p>
+<ol>
+<li>
+<p><em>Install tracy.</em> Windows users can download it at
+<a href="https://github.com/wolfpld/tracy/releases">its GitHub release page</a>. Linux and macOS users can
+install it with package manager. Otherwise, you may have to build it yourself following tracy
+docs.</p>
+</li>
+<li>
+<p><em>Build a profiling version of Neovide.</em> Follow
+<a href="https://neovide.dev/installation.html">the installation page</a> to install all required
+dependencies and Rust SDK. Download or clone
+<a href="https://github.com/neovide/neovide">source code of Neovide</a>. Build it with following commands.
+Note that you need to specify <strong>both</strong> <code>--profile profiling</code> and <code>--features profiling</code>, so that
+Neovide is built for a profiling version. Or, you can skip these commands, and let <code>cargo run</code>
+in step 5 build it automatically before running.</p>
+<pre><code class="language-sh">cd [neovide-source-dir]
+cargo build --profile profiling --features profiling
+</code></pre>
+</li>
+<li>
+<p><em>Prepare tracy for collecting data.</em> Start tracy with,</p>
+<pre><code class="language-sh">tracy-capture -o [log-file-path]
+</code></pre>
+<p>You will see output like this,</p>
+<pre><code class="language-plain">Connecting to 127.0.0.1:8086...
+</code></pre>
+<p>It means tracy begins to wait for Neovide and will capture profiling data once it starts.</p>
+</li>
+<li>
+<p><em>Running Neovide and reproduce the performance issue.</em> Start Neovide with following
+commands in another terminal. If you have built Neovide with commands in step 3, this should
+be very fast. If not, it will build Neovide first. You have to specify
+<code>--profile profiling</code> and <code>--features profiling</code> here, too.</p>
+<pre><code class="language-sh">cd [neovide-source-dir]
+cargo run --profile profiling --features profiling -- --no-fork [neovide-arguments...]
+</code></pre>
+<p>Now do whatever leads to performance issue in Neovide and exit.</p>
+</li>
+<li>
+<p><em>Get the tracy data and report bugs with it.</em> Turn to tracy, you will see output like,</p>
+<pre><code class="language-plain">Saving trace... done!
+</code></pre>
+<p>You will find tracy log file at the path you specified before. Attach it in your bug
+report! You can also view it yourself with <code>tracy [log-file-path]</code>.</p>
+</li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
 <p>Commonly asked questions, or just explanations/elaborations on stuff.</p>
 <h2 id="how-can-i-use-cmd-ccmd-v-to-copy-and-paste"><a class="header" href="#how-can-i-use-cmd-ccmd-v-to-copy-and-paste">How can I use cmd-c/cmd-v to copy and paste?</a></h2>
@@ -1096,7 +1438,6 @@ As a temporary work around, you may set <code>g:neovide_refresh_rate</code> to t
 your terminal adds these keybindings, as neovim doesn't have them by default. We can replicate
 this behavior by adding keybindings in neovim.</p>
 <pre><code class="language-lua">if vim.g.neovide then
-  vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
   vim.keymap.set('n', '&lt;D-s&gt;', ':w&lt;CR&gt;') -- Save
   vim.keymap.set('v', '&lt;D-c&gt;', '&quot;+y') -- Copy
   vim.keymap.set('n', '&lt;D-v&gt;', '&quot;+P') -- Paste normal mode
@@ -1106,20 +1447,18 @@ this behavior by adding keybindings in neovim.</p>
 end
 
 -- Allow clipboard copy paste in neovim
-vim.g.neovide_input_use_logo = 1
 vim.api.nvim_set_keymap('', '&lt;D-v&gt;', '+p&lt;CR&gt;', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('!', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('t', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 </code></pre>
-<h2 id="how-to-enable-scrolling-animations-and-transparency"><a class="header" href="#how-to-enable-scrolling-animations-and-transparency">How To Enable Scrolling Animations and Transparency?</a></h2>
-<p>First, <a href="command-line-reference.html#multigrid">enable multigrid</a>, it's not enabled by default.</p>
-<p>Then, scrolling animations should work, for transparency see the section below.</p>
 <h2 id="how-to-enable-floating-and-popupmenu-transparency"><a class="header" href="#how-to-enable-floating-and-popupmenu-transparency">How To Enable Floating And Popupmenu Transparency?</a></h2>
 <p>Those are controlled through the <code>winblend</code> and <code>pumblend</code> options. See their help pages for more,
 but for short: Both options can be values between <code>0</code> (opaque) and <code>100</code> (fully transparent),
 inclusively on both ends. <code>winblend</code> controls the background for floating windows, <code>pumblend</code> the
 one for the popup menu.</p>
+<p>telescope.nvim is different here though. Instead of using the global <code>winblend</code> option, it has its
+own <code>telescope.defaults.winblend</code> configuration option, see <a href="https://github.com/neovide/neovide/issues/1626#issuecomment-1701080545">this comment in #1626</a>.</p>
 <h2 id="how-can-i-dynamically-change-the-scale-at-runtime"><a class="header" href="#how-can-i-dynamically-change-the-scale-at-runtime">How Can I Dynamically Change The Scale At Runtime?</a></h2>
 <p>Neovide offers the setting <code>g:neovide_scale_factor</code>, which is multiplied with
 the OS scale factor and the font size. So using this could look like</p>
@@ -1195,6 +1534,18 @@ any random highlights which have <code>Term</code> in name won't help.</p>
 <p>Some colorschemes think of this, some don't. Search in the documentation of
 yours, if it's your own, add it, and if you can't seem to find anything, open an
 issue in the colorscheme's repo.</p>
+<h2 id="compose-key-sequences-do-not-work"><a class="header" href="#compose-key-sequences-do-not-work">Compose key sequences do not work</a></h2>
+<p>One possible cause might be inconsistent capitalization of your locale
+settings, see <a href="https://github.com/neovide/neovide/issues/1896#issuecomment-1616421167.">#1896</a>. Possibly you're also running an outdated version of
+Neovide.</p>
+<p>Another possible cause is that you are using IME on X11. Dead keys with IME is
+not yet supported, but you can work around that either by disabling IME or
+configuring it to only be enabled in insert mode. See
+<a href="configuration.html">Configuration</a>.</p>
+<h2 id="font-size-is-weird-with-high-dpi-display-on-x11"><a class="header" href="#font-size-is-weird-with-high-dpi-display-on-x11">Font size is weird with high dpi display on x11</a></h2>
+<p>Winit looks in multiple locations for the configured dpi.
+Make sure its set in at least one of them. More details
+here: <a href="https://github.com/neovide/neovide/issues/2010#issuecomment-1704416685">#2010</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maintainer-cookbook"><a class="header" href="#maintainer-cookbook">Maintainer Cookbook</a></h1>
 <p>General notes about collaborating/doing maintenance work on Neovide.</p>
 <h2 id="how-to-keep-your-sanity"><a class="header" href="#how-to-keep-your-sanity">How to keep your sanity</a></h2>
@@ -1239,21 +1590,19 @@ those pointers.</p>
 </li>
 </ul>
 <h2 id="how-to-release"><a class="header" href="#how-to-release">How to release</a></h2>
+<p>Note: These are not a strict rulebook, but rather one <em>possible</em> way for releasing. Adjust as you
+see fit (and then update here with your findings).</p>
 <h3 id="preparing"><a class="header" href="#preparing">Preparing</a></h3>
-<ul>
-<li>
-<p>Head over to <a href="https://github.com/neovide/neovide/releases">the releases page</a> and hit the <code>Draft a new release</code> button.</p>
-</li>
-<li>
-<p>Keep the resulting page somewhere safe open, you'll need to work with it the
-next half an hour and GitHub doesn't automatically save its contents.</p>
-</li>
-<li>
-<p>Create a new tag with an appropriate version number.</p>
+<ol>
+<li>Head over to <a href="https://github.com/neovide/neovide/releases">the releases page</a> and hit the <code>Draft a new release</code> button.</li>
+<li>Keep the resulting page somewhere safe open, you'll need to work with it the
+next half an hour and GitHub doesn't automatically save its contents.</li>
+<li>Create a new tag with an appropriate version number.</li>
+</ol>
 <p>We're not fully following <a href="https://semver.org/">SemVer</a> here, but as of 0.10.1 larger
 changes should be an increase in the MINOR part, while fixups should be an
 increase in the PATCH part.</p>
-</li>
+<ol>
 <li>
 <p>Hit the <code>Generate release notes</code> button.</p>
 </li>
@@ -1270,21 +1619,21 @@ for the end user, linking to the relevant PR/commit</li>
 <li>
 <p>Hit the <code>Save draft</code> button</p>
 </li>
-</ul>
+</ol>
 <p>You can make several rounds of preparing such releases through editing the
 current draft over time, to make sure every contributor is mentioned and every
 change is included.</p>
 <h3 id="actually-releasing"><a class="header" href="#actually-releasing">Actually releasing</a></h3>
-<ul>
+<ol>
 <li>Announce a short period of time where last changes to be done or fixup work
 can flow in (can be anything you imagine, though 24 hours to one week might
 be enough depending on the blocker)</li>
 <li>Wait for that period to pass</li>
 <li>Have a last look over the draft to make sure every new contributor and change has
 been mentioned</li>
-</ul>
+</ol>
 <p>Now here's where the order becomes important:</p>
-<ul>
+<ol>
 <li>
 <p>Make sure the working directory is clean</p>
 </li>
@@ -1297,14 +1646,15 @@ been mentioned</li>
 <li>
 <p>Bump the version to match the tag name everywhere</p>
 <ul>
-<li><code>Cargo.toml</code></li>
+<li><code>Cargo.toml</code> (do note it contains the version <em>twice</em>, one time in the
+top, one time at the bottom in the bundling section)</li>
 <li><code>snap/snapcraft.yaml</code></li>
 <li><code>website/docs/*.md</code> and update <code>Unreleased yet</code> to <code>Available since $tag</code>
 (where <code>$tag</code> is the tag name)</li>
 </ul>
 </li>
 <li>
-<p>Run <code>cargo build</code> and make sure it succeeds, <strong>remember to <code>git add Cargo.lock</code> to make sure releases stay reproducable
+<p>Run <code>cargo build</code> and make sure it succeeds, <strong>remember to <code>git add Cargo.lock</code> to make sure releases stay reproducible
 (<a href="https://github.com/neovide/neovide/issues/1628">#1628</a>,
 <a href="https://github.com/neovide/neovide/issues/1482">#1482</a>)</strong></p>
 </li>
@@ -1317,17 +1667,33 @@ been mentioned</li>
 <li>
 <p>Run <code>cargo build --frozen</code></p>
 </li>
-</ul>
+</ol>
 <p>In the meantime, you can look through the previous commits to see if you missed
 anything.</p>
+<ol>
+<li>
+<p>From the <code>Bump version to $tag</code> commit, download all the artifacts</p>
+</li>
+<li>
+<p>Unzip</p>
 <ul>
-<li>From the <code>Bump version to $tag</code> commit, download all the artifacts</li>
-<li>Unzip <code>neovide-linux.tar.gz.zip</code> to get <code>neovide.tar.gz</code></li>
-<li>Head to the release draft, edit it and upload the produced artifacts (using
-the unzipped <code>neovide.tar.gz</code> for Linux)</li>
-<li>Hit <code>Publish release</code></li>
-<li>profit</li>
+<li><code>neovide.AppImage.zip</code></li>
+<li><code>neovide.AppImage.zsync.zip</code></li>
+<li><code>neovide.msi.zip</code></li>
+<li><code>neovide-linux-x86_64.tar.gz.zip</code></li>
 </ul>
+</li>
+<li>
+<p>Head to the release draft, edit it and upload the produced artifacts (using
+the unzipped versions if listed above)</p>
+</li>
+<li>
+<p>Hit <code>Publish release</code></p>
+</li>
+<li>
+<p>profit</p>
+</li>
+</ol>
 <p>Phew. Now, announce the new release anywhere you think is appropriate (like
 Reddit, Discord, whatever) <del>and go create a PR in nixpkgs</del>.</p>
 

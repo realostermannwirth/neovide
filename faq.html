@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">4.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">5.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">6.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html" class="active"><strong aria-hidden="true">7.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">8.</strong> Maintainer Cookbook</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">4.</strong> Commands</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">5.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="config-file.html"><strong aria-hidden="true">6.</strong> Config File</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">7.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">8.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html" class="active"><strong aria-hidden="true">9.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">10.</strong> Maintainer Cookbook</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,7 +150,6 @@
 your terminal adds these keybindings, as neovim doesn't have them by default. We can replicate
 this behavior by adding keybindings in neovim.</p>
 <pre><code class="language-lua">if vim.g.neovide then
-  vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
   vim.keymap.set('n', '&lt;D-s&gt;', ':w&lt;CR&gt;') -- Save
   vim.keymap.set('v', '&lt;D-c&gt;', '&quot;+y') -- Copy
   vim.keymap.set('n', '&lt;D-v&gt;', '&quot;+P') -- Paste normal mode
@@ -160,20 +159,18 @@ this behavior by adding keybindings in neovim.</p>
 end
 
 -- Allow clipboard copy paste in neovim
-vim.g.neovide_input_use_logo = 1
 vim.api.nvim_set_keymap('', '&lt;D-v&gt;', '+p&lt;CR&gt;', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('!', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('t', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
 </code></pre>
-<h2 id="how-to-enable-scrolling-animations-and-transparency"><a class="header" href="#how-to-enable-scrolling-animations-and-transparency">How To Enable Scrolling Animations and Transparency?</a></h2>
-<p>First, <a href="command-line-reference.html#multigrid">enable multigrid</a>, it's not enabled by default.</p>
-<p>Then, scrolling animations should work, for transparency see the section below.</p>
 <h2 id="how-to-enable-floating-and-popupmenu-transparency"><a class="header" href="#how-to-enable-floating-and-popupmenu-transparency">How To Enable Floating And Popupmenu Transparency?</a></h2>
 <p>Those are controlled through the <code>winblend</code> and <code>pumblend</code> options. See their help pages for more,
 but for short: Both options can be values between <code>0</code> (opaque) and <code>100</code> (fully transparent),
 inclusively on both ends. <code>winblend</code> controls the background for floating windows, <code>pumblend</code> the
 one for the popup menu.</p>
+<p>telescope.nvim is different here though. Instead of using the global <code>winblend</code> option, it has its
+own <code>telescope.defaults.winblend</code> configuration option, see <a href="https://github.com/neovide/neovide/issues/1626#issuecomment-1701080545">this comment in #1626</a>.</p>
 <h2 id="how-can-i-dynamically-change-the-scale-at-runtime"><a class="header" href="#how-can-i-dynamically-change-the-scale-at-runtime">How Can I Dynamically Change The Scale At Runtime?</a></h2>
 <p>Neovide offers the setting <code>g:neovide_scale_factor</code>, which is multiplied with
 the OS scale factor and the font size. So using this could look like</p>
@@ -249,6 +246,18 @@ any random highlights which have <code>Term</code> in name won't help.</p>
 <p>Some colorschemes think of this, some don't. Search in the documentation of
 yours, if it's your own, add it, and if you can't seem to find anything, open an
 issue in the colorscheme's repo.</p>
+<h2 id="compose-key-sequences-do-not-work"><a class="header" href="#compose-key-sequences-do-not-work">Compose key sequences do not work</a></h2>
+<p>One possible cause might be inconsistent capitalization of your locale
+settings, see <a href="https://github.com/neovide/neovide/issues/1896#issuecomment-1616421167.">#1896</a>. Possibly you're also running an outdated version of
+Neovide.</p>
+<p>Another possible cause is that you are using IME on X11. Dead keys with IME is
+not yet supported, but you can work around that either by disabling IME or
+configuring it to only be enabled in insert mode. See
+<a href="configuration.html">Configuration</a>.</p>
+<h2 id="font-size-is-weird-with-high-dpi-display-on-x11"><a class="header" href="#font-size-is-weird-with-high-dpi-display-on-x11">Font size is weird with high dpi display on x11</a></h2>
+<p>Winit looks in multiple locations for the configured dpi.
+Make sure its set in at least one of them. More details
+here: <a href="https://github.com/neovide/neovide/issues/2010#issuecomment-1704416685">#2010</a>.</p>
 
                     </main>
 

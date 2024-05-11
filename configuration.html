@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html" class="active"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">4.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">5.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">6.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">7.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">8.</strong> Maintainer Cookbook</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Neovide</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="features.html"><strong aria-hidden="true">1.</strong> Features</a></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="configuration.html" class="active"><strong aria-hidden="true">3.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">4.</strong> Commands</a></li><li class="chapter-item expanded "><a href="command-line-reference.html"><strong aria-hidden="true">5.</strong> Command Line Reference</a></li><li class="chapter-item expanded "><a href="config-file.html"><strong aria-hidden="true">6.</strong> Config File</a></li><li class="chapter-item expanded "><a href="editing-with-external-tools.html"><strong aria-hidden="true">7.</strong> Editing w/ External Tools</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">8.</strong> Troubleshooting</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">9.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="maintainer-cookbook.html"><strong aria-hidden="true">10.</strong> Maintainer Cookbook</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,7 +169,8 @@ end
 <p>Lua:</p>
 <pre><code class="language-lua">vim.o.guifont = &quot;Source Code Pro:h14&quot; -- text below applies for VimScript
 </code></pre>
-<p>Controls the font used by Neovide. Only setting which is actually controlled through an option, and
+<p>Controls the font used by Neovide. Also check <a href="./config-file.html">the config file</a> to see how to
+configure features. This is the only setting which is actually controlled through an option, and
 as such it's also documented in <code>:h guifont</code>. But to sum it up and also add Neovide's extension:</p>
 <ul>
 <li>The basic format is <code>Primary\ Font,Fallback\ Font\ 1,Fallback\ Font\ 2:option1:option2:option3</code>,
@@ -188,6 +189,9 @@ while you can have as many fallback fonts as you want (even 0) and as many optio
 <li>can be one of the following:
 <ul>
 <li><code>hX</code> — Sets the font size to <code>X</code> points, while <code>X</code> can be any (even floating-point) number.</li>
+<li><code>wX</code> (available since 0.11.2) — Sets the width <strong>relative offset</strong> to be <code>X</code> points, while <code>X</code>
+can be again any number. Negative values shift characters closer together, positive values
+shift them further apart.</li>
 <li><code>b</code> — Sets the font <strong>bold</strong>.</li>
 <li><code>i</code> — Sets the font <em>italic</em>.</li>
 <li><code>#e-X</code> (available since 0.10.2) — Sets edge pixels to be drawn opaquely or
@@ -255,7 +259,11 @@ vim.g.neovide_padding_left = 0
 <p><strong>Available since 0.10.4.</strong></p>
 <p>Controls the space between the window border and the actual Neovim, which is filled with the
 background color instead.</p>
-<h4 id="background-color-currently-macos-only"><a class="header" href="#background-color-currently-macos-only">Background Color (Currently macOS only)</a></h4>
+<h4 id="background-color-deprecated-currently-macos-only"><a class="header" href="#background-color-deprecated-currently-macos-only">Background Color (<strong>Deprecated</strong>, Currently macOS only)</a></h4>
+<p>This configuration is deprecated now and might be removed in the future. In
+<a href="https://github.com/neovide/neovide/issues/2168">#2168</a>, we have made Neovide control the title bar
+color itself. The color of title bar now honors <a href="#transparency"><code>neovide_transparency</code></a>. If you want
+a transparent title bar, setting <code>neovide_transparency</code> is sufficient.</p>
 <p>VimScript:</p>
 <pre><code class="language-vim">&quot; g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 let g:neovide_transparency = 0.0
@@ -272,13 +280,24 @@ vim.g.neovide_transparency = 0.0
 vim.g.transparency = 0.8
 vim.g.neovide_background_color = &quot;#0f1117&quot; .. alpha()
 </code></pre>
-<p><strong>Available since 0.10.</strong></p>
+<p><strong>Available since 0.10.</strong>
+<strong>Deprecated in 0.12.2.</strong></p>
 <p><img src="assets/BackgroundColor.png" alt="BackgroundColor" /></p>
 <p>Setting <code>g:neovide_background_color</code> to a value that can be parsed by
 <a href="https://github.com/mazznoer/csscolorparser-rs">csscolorparser-rs</a> will set the color of the whole
 window to that value.</p>
 <p>Note that <code>g:neovide_transparency</code> should be 0 if you want to unify transparency of content and
 title bar.</p>
+<h4 id="window-blur-currently-macos-only"><a class="header" href="#window-blur-currently-macos-only">Window Blur (Currently macOS only)</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_window_blurred = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_window_blurred = true
+</code></pre>
+<p><strong>Available since 0.12.</strong></p>
+<p>Setting <code>g:neovide_window_blurred</code> toggles the window blur state.</p>
+<p>The blurred level respects the <code>g:neovide_transparency</code> value between 0.0 and 1.0.</p>
 <h4 id="floating-blur-amount"><a class="header" href="#floating-blur-amount">Floating Blur Amount</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_floating_blur_amount_x = 2.0
@@ -291,6 +310,27 @@ vim.g.neovide_floating_blur_amount_y = 2.0
 <p><strong>Available since 0.9.</strong></p>
 <p>Setting <code>g:neovide_floating_blur_amount_x</code> and <code>g:neovide_floating_blur_amount_y</code> controls the blur
 radius on the respective axis for floating windows.</p>
+<h4 id="floating-shadow"><a class="header" href="#floating-shadow">Floating Shadow</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_floating_shadow = v:true
+let g:neovide_floating_z_height = 10
+let g:neovide_light_angle_degrees = 45
+let g:neovide_light_radius = 5
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_floating_shadow = true
+vim.g.neovide_floating_z_height = 10
+vim.g.neovide_light_angle_degrees = 45
+vim.g.neovide_light_radius = 5
+</code></pre>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Setting <code>g:neovide_floating_shadow</code> to false will disable the shadow borders for floating windows.
+The other variables configure the shadow in various ways:</p>
+<ul>
+<li><code>g:neovide_floating_z_height</code> sets the virtual height of the floating window from the ground plane</li>
+<li><code>g:neovide_light_angle_degrees</code> sets the angle from the screen normal of the casting light</li>
+<li><code>g:neovide_light_radius</code> sets the radius of the casting light</li>
+</ul>
 <h4 id="transparency"><a class="header" href="#transparency">Transparency</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_transparency = 0.8
@@ -301,6 +341,15 @@ radius on the respective axis for floating windows.</p>
 <p><img src="assets/Transparency.png" alt="Transparency" /></p>
 <p>Setting <code>g:neovide_transparency</code> to a value between 0.0 and 1.0 will set the opacity of the window
 to that value.</p>
+<h4 id="show-border-currently-macos-only"><a class="header" href="#show-border-currently-macos-only">Show Border (Currently macOS only)</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_show_border = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_show_border = true
+</code></pre>
+<p>Draw a grey border around opaque windows only.</p>
+<p>Default: <code>false</code></p>
 <h4 id="scroll-animation-length"><a class="header" href="#scroll-animation-length">Scroll Animation Length</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_scroll_animation_length = 0.3
@@ -308,7 +357,20 @@ to that value.</p>
 <p>Lua:</p>
 <pre><code class="language-lua">vim.g.neovide_scroll_animation_length = 0.3
 </code></pre>
-<p>Sets how long the scroll animation takes to complete, measured in seconds.</p>
+<p>Sets how long the scroll animation takes to complete, measured in seconds. Note that the timing is
+not completely accurate and might depend slightly on have far you scroll, so experimenting is
+encouraged in order to tune it to your liking.</p>
+<h4 id="far-scroll-lines"><a class="header" href="#far-scroll-lines">Far scroll lines</a></h4>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_scroll_animation_far_lines = 1
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_scroll_animation_far_lines = 1
+</code></pre>
+<p>When scrolling more than one screen at a time, only this many lines at the end of the scroll action
+will be animated. Set it to 0 to snap to the final position without any animation, or to something
+big like 9999 to always scroll the whole screen, much like Neovide &lt;= 0.10.4 did.</p>
 <h4 id="hiding-the-mouse-when-typing"><a class="header" href="#hiding-the-mouse-when-typing">Hiding the mouse when typing</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_hide_mouse_when_typing = v:false
@@ -321,17 +383,41 @@ only affects the mouse if it is currently within the bounds of the neovide windo
 mouse makes it visible again.</p>
 <h4 id="underline-automatic-scaling"><a class="header" href="#underline-automatic-scaling">Underline automatic scaling</a></h4>
 <p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_underline_automatic_scaling = v:false
+<pre><code class="language-vim">let g:neovide_underline_stroke_scale = 1.0
 </code></pre>
 <p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_underline_automatic_scaling = false
+<pre><code class="language-lua">vim.g.neovide_underline_stroke_scale = 1.0
 </code></pre>
-<p><strong>Available since 0.10.</strong></p>
-<p>Setting <code>g:neovide_underline_automatic_scaling</code> to a boolean value determines whether automatic
-scaling of text underlines (including undercurl, underdash, etc.) is enabled. Noticeable for font
-sizes above 15.</p>
-<p><strong>Note</strong>: This is currently glitchy, and leads to some underlines being clipped by the line of text
-below.</p>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Setting <code>g:neovide_underline_stroke_scale</code> to a floating point will increase or decrease the stroke
+width of the underlines (including undercurl, underdash, etc.). If the scaled stroke width is less
+than 1, it is clamped to 1 to prevent strange aliasing.</p>
+<p><strong>Note</strong>: This is currently glitchy if the scale is too large, and leads to some underlines being
+clipped by the line of text below.</p>
+<h4 id="theme"><a class="header" href="#theme">Theme</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_theme = 'auto'
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_theme = 'auto'
+</code></pre>
+<p><strong>Available since 0.11.0.</strong></p>
+<p>Set the <a href="https://neovim.io/doc/user/options.html#&#x27;background&#x27;"><code>background</code></a> option when Neovide
+starts. Possible values: <em>light</em>, <em>dark</em>, <em>auto</em>. On systems that support it, <em>auto</em> will mirror the
+system theme, and will update <code>background</code> when the system theme changes.</p>
+<h4 id="fix-border-and-winbar-scrolling-glitches"><a class="header" href="#fix-border-and-winbar-scrolling-glitches">Fix border and winbar scrolling glitches</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_unlink_border_highlights = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_unlink_border_highlights = true
+</code></pre>
+<p><strong>Available since 0.12.0.</strong></p>
+<p>Neovide uses some highlight groups for detecting the border of the windows, when scrolling. This
+detection is not perfect due to some limitations of Neovim, it only returns the final highlight
+groups for linked highlights. This option unlinks those highlight groups after the color scheme is
+loaded to make Neovide detect them properly.</p>
+<p>If this causes other problems, you can set this option to false.</p>
 <h3 id="functionality"><a class="header" href="#functionality">Functionality</a></h3>
 <h4 id="refresh-rate"><a class="header" href="#refresh-rate">Refresh Rate</a></h4>
 <p>VimScript:</p>
@@ -342,8 +428,8 @@ below.</p>
 </code></pre>
 <p>Setting <code>g:neovide_refresh_rate</code> to a positive integer will set the refresh rate of the app. This is
 limited by the refresh rate of your physical hardware, but can be lowered to increase battery life.</p>
-<p>Also do note that Neovide's frame pacing is far from optimal at the moment, so better hardware might
-not mean better FPS.</p>
+<p>This setting is only effective when not using vsync, for example by passing <code>--no-vsync</code> on the
+commandline.</p>
 <h4 id="idle-refresh-rate"><a class="header" href="#idle-refresh-rate">Idle Refresh Rate</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_refresh_rate_idle = 5
@@ -403,30 +489,58 @@ from the previous session or the default size will be used on startup. The comma
 <p>Setting this to <code>v:true</code> enables the profiler, which shows a frametime graph in the upper left
 corner.</p>
 <h3 id="input-settings"><a class="header" href="#input-settings">Input Settings</a></h3>
-<h4 id="use-logo-key"><a class="header" href="#use-logo-key">Use Logo Key</a></h4>
+<h4 id="macos-option-key-is-meta"><a class="header" href="#macos-option-key-is-meta">macOS Option Key is Meta</a></h4>
+<p>Possible values are <code>both</code>, <code>only_left</code>, <code>only_right</code>, <code>none</code>. Set to <code>none</code> by default.</p>
 <p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_input_use_logo = v:false  &quot; v:true on macOS
+<pre><code class="language-vim">let g:neovide_input_macos_option_key_is_meta = 'only_left'
 </code></pre>
 <p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_input_use_logo = false    -- true on macOS
-</code></pre>
-<p>Setting <code>g:neovide_input_use_logo</code> to a boolean value will change how logo key (also known as
-<a href="https://en.wikipedia.org/wiki/Super_key_(keyboard_button)">super key</a>,
-<a href="https://en.wikipedia.org/wiki/Command_key">command key</a> or
-<a href="https://en.wikipedia.org/wiki/Windows_key">windows key</a>) is handled, allowing all key combinations
-containing logo to be forwarded to neovim. On MacOS, this defaults to <code>true</code> (so that e.g. <code>cmd+v</code>
-works for pasting with respective setup of <code>init.vim</code>), and to <code>false</code> for other platforms (that
-typically use e.g. <code>ctrl+v</code> for pasting).</p>
-<h4 id="macos-alt-is-meta"><a class="header" href="#macos-alt-is-meta">macOS Alt is Meta</a></h4>
-<p>VimScript:</p>
-<pre><code class="language-vim">let g:neovide_input_macos_alt_is_meta = v:false
-</code></pre>
-<p>Lua:</p>
-<pre><code class="language-lua">vim.g.neovide_input_macos_alt_is_meta = false
+<pre><code class="language-lua">vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
 </code></pre>
 <p><strong>Available since 0.10.</strong></p>
 <p>Interprets <kbd>Alt</kbd> + <kbd>whatever</kbd> actually as <code>&lt;M-whatever&gt;</code>, instead of sending the
 actual special character to Neovim.</p>
+<h4 id="ime"><a class="header" href="#ime">IME</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_input_ime = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_input_ime = true
+</code></pre>
+<p><strong>Available since 0.11.0.</strong></p>
+<p>This lets you disable the IME input. For example, to only enables IME in input mode and when
+searching, so that you can navigate normally, when typing some East Asian languages, you can add
+a few auto commands:</p>
+<pre><code class="language-vim">augroup ime_input
+    autocmd!
+    autocmd InsertLeave * execute &quot;let g:neovide_input_ime=v:false&quot;
+    autocmd InsertEnter * execute &quot;let g:neovide_input_ime=v:true&quot;
+    autocmd CmdlineEnter [/\?] execute &quot;let g:neovide_input_ime=v:false&quot;
+    autocmd CmdlineLeave [/\?] execute &quot;let g:neovide_input_ime=v:true&quot;
+augroup END
+</code></pre>
+<pre><code class="language-lua">local function set_ime(args)
+    if args.event:match(&quot;Enter$&quot;) then
+        vim.g.neovide_input_ime = true
+    else
+        vim.g.neovide_input_ime = false
+    end
+end
+
+local ime_input = vim.api.nvim_create_augroup(&quot;ime_input&quot;, { clear = true })
+
+vim.api.nvim_create_autocmd({ &quot;InsertEnter&quot;, &quot;InsertLeave&quot; }, {
+    group = ime_input,
+    pattern = &quot;*&quot;,
+    callback = set_ime
+})
+
+vim.api.nvim_create_autocmd({ &quot;CmdlineEnter&quot;, &quot;CmdlineLeave&quot; }, {
+    group = ime_input,
+    pattern = &quot;[/\\?]&quot;,
+    callback = set_ime
+})
+</code></pre>
 <h4 id="touch-deadzone"><a class="header" href="#touch-deadzone">Touch Deadzone</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_touch_deadzone = 6.0
@@ -519,6 +633,16 @@ command line.</p>
 If the value is &lt;=0 then the cursor will be invisible. This setting takes effect when the editor
 window is unfocused, at which time a block cursor will be rendered as an outline instead of as a
 full rectangle.</p>
+<h4 id="animate-cursor-blink"><a class="header" href="#animate-cursor-blink">Animate cursor blink</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_cursor_smooth_blink = v:false
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_cursor_smooth_blink = false
+</code></pre>
+<p>If enabled, the cursor will smoothly animate the transition between the cursor's on and off state.
+The built in <code>guicursor</code> neovim option needs to be configured to enable blinking by having a value
+set for both <code>blinkoff</code>, <code>blinkon</code> and <code>blinkwait</code> for this setting to apply.</p>
 <h3 id="cursor-particles"><a class="header" href="#cursor-particles">Cursor Particles</a></h3>
 <p>There are a number of vfx modes you can enable which produce particles behind the cursor. These are
 enabled by setting <code>g:neovide_cursor_vfx_mode</code> to one of the following constants.</p>
@@ -643,7 +767,7 @@ more &quot;nervous&quot;, the lower, the more it looks like a collapsing sine wa
                             <a rel="prev" href="installation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="command-line-reference.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="commands.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -655,7 +779,7 @@ more &quot;nervous&quot;, the lower, the more it looks like a collapsing sine wa
                     <a rel="prev" href="installation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="command-line-reference.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="commands.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
